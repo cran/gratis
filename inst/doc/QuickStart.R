@@ -1,60 +1,69 @@
 ## ----initial, echo = FALSE, cache = FALSE, results = 'hide'-------------------
 library(knitr)
 opts_chunk$set(
-  warning = FALSE, message = FALSE, echo = TRUE,
-  fig.width = 7, fig.height = 6, fig.align = 'centre',
+  warning = TRUE,
+  message = TRUE,
+  echo = TRUE,
+  cache = TRUE,
+  fig.width = 7,
+  fig.height = 4,
+  fig.align = 'centre',
   comment = "#>"
 )
 
-## ---- message=FALSE, include = FALSE------------------------------------------
-library(forecast)
-library(tsibble)
-
 ## ----setup--------------------------------------------------------------------
-# load package
 library(gratis)
+library(feasts)
+set.seed(5)
 
-## ----fig.height = 6, fig.width = 7--------------------------------------------
-generate_ts(n.ts = 3, freq = 12, nComp = 2, n = 120, output_format = "tsibble")
+## ----marmodel-----------------------------------------------------------------
+qmar <- mar_model(seasonal_periods = 4)
+qmar
 
-## ----fig.height = 6, fig.width = 7--------------------------------------------
-x <- generate_ts(n.ts = 3, freq = 12, nComp = 2, n = 120,output_format = "list")
-# N1 time series
-x$N1$pars
+## ----marplot------------------------------------------------------------------
+qmar %>%
+  generate(nseries = 9, length = 20) %>%
+  autoplot(value)
 
-## ----fig.height = 6, fig.width = 7--------------------------------------------
-# plot N1 time series
-autoplot(x$N1$x)
+## ----hmarmodel----------------------------------------------------------------
+hmar <- mar_model(seasonal_periods = c(24, 7*24))
+hmar %>%
+  generate(nseries = 1, length= 2*7*24) %>%
+  autoplot(value)
 
-## ----fig.height = 6, fig.width = 7--------------------------------------------
-generate_msts(seasonal.periods = c(7, 365), n = 800, nComp = 2,output_format="tsibble")
-
-## ----fig.height = 6, fig.width = 7--------------------------------------------
-x <- generate_msts(seasonal.periods = c(7, 365), n = 800, nComp = 2,output_format="list")
-
-## -----------------------------------------------------------------------------
-autoplot(x)
-
-## ----fig.height = 6, fig.width = 7--------------------------------------------
-generate_ts_with_target(
-  n = 1, ts.length = 60, freq = 1, seasonal = 0,
-                        features = c('entropy', 'stl_features'),
-                      selected.features = c('entropy', 'trend'),
-                        target = c(0.6, 0.9),  
-                        parallel=FALSE,
-                        output_format = "tsibble"
-                        )
-
-## ----fig.height = 6, fig.width = 7--------------------------------------------
-x <- generate_ts_with_target(
-  n = 1, ts.length = 60, freq = 1, seasonal = 0,
-                        features = c('entropy', 'stl_features'),
-                      selected.features = c('entropy', 'trend'),
-                        target = c(0.6, 0.9),  
-                        parallel=FALSE,
-                        output_format = "list"
-                        )
+## ----myfeatures---------------------------------------------------------------
+library(tsfeatures)
+my_features <- function(y) {
+  c(stl_features(y)[c("trend", "seasonal_strength", "peak", "trough")])
+}
+y <- simulate_target(
+  length = length(USAccDeaths),
+  seasonal_periods = frequency(USAccDeaths),
+  feature_function = my_features, target = my_features(USAccDeaths)
+)
+# Make new series same scale and frequency as USAccDeaths
+y <- ts(scale(y) * sd(USAccDeaths) + mean(USAccDeaths))
+tsp(y) <- tsp(USAccDeaths)
+cbind(USAccDeaths, y) %>% autoplot()
+cbind(my_features(USAccDeaths), my_features(y))
 
 ## -----------------------------------------------------------------------------
-autoplot(x)
+library(dplyr)
+my_features <- function(y) {
+  c(entropy(y), acf = acf(y, plot = FALSE)$acf[2:3, 1, 1])
+}
+df <- generate_target(
+  length = 60, feature_function = my_features, target = c(0.5, 0.9, 0.8)
+)
+df %>% 
+ as_tibble() %>%
+ group_by(key) %>%
+ summarise(value = my_features(value), 
+           feature=c("entropy","acf1", "acf2"),
+           .groups = "drop") 
+df %>% autoplot(value)
+
+## ----arimamodel---------------------------------------------------------------
+mod <- arima_model(frequency = 4)
+mod
 
