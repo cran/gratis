@@ -55,12 +55,12 @@ my_features <- function(y) {
 df <- generate_target(
   length = 60, feature_function = my_features, target = c(0.5, 0.9, 0.8)
 )
-df %>% 
+df %>%
  as_tibble() %>%
  group_by(key) %>%
- summarise(value = my_features(value), 
+ summarise(value = my_features(value),
            feature=c("entropy","acf1", "acf2"),
-           .groups = "drop") 
+           .groups = "drop")
 df %>% autoplot(value)
 
 ## ----arimamodel---------------------------------------------------------------
