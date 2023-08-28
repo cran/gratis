@@ -2,7 +2,7 @@ Package: gratis
 Type: Package
 Title: Generating Time Series with Diverse and Controllable
         Characteristics
-Version: 1.0.3
+Version: 1.0.5
 Authors@R: c(
     person("Yanfei", "Kang", role = c("aut"), email = "yanfeikang@buaa.edu.cn", comment = c(ORCID = "0000-0001-8769-6650")),
     person("Feng", "Li", role = c("aut", "cre"), email = "feng.li@cufe.edu.cn", comment = c(ORCID = "0000-0002-4248-9778")),
@@ -27,11 +27,11 @@ License: GPL-3
 Encoding: UTF-8
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
-Packaged: 2023-03-27 02:49:40 UTC; fli
+Packaged: 2023-08-28 08:52:20 UTC; fli
 Author: Yanfei Kang [aut] (<https://orcid.org/0000-0001-8769-6650>),
   Feng Li [aut, cre] (<https://orcid.org/0000-0002-4248-9778>),
   Rob Hyndman [aut] (<https://orcid.org/0000-0002-2140-5352>),
   Mitchell O'Hara-Wild [ctb] (<https://orcid.org/0000-0001-6729-7695>),
   Bocong Zhao [ctb] (<https://orcid.org/0000-0001-8434-9047>)
 Maintainer: Feng Li <feng.li@cufe.edu.cn>
-Date/Publication: 2023-03-27 07:50:02 UTC
+Date/Publication: 2023-08-28 09:20:06 UTC
