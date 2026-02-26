@@ -2,11 +2,11 @@ Type: Package
 Package: gratis
 Title: Generating Time Series with Diverse and Controllable
         Characteristics
-Version: 1.0.7
+Version: 1.0.8
 Authors@R: c(
     person("Yanfei", "Kang", , "yanfeikang@buaa.edu.cn", role = "aut",
            comment = c(ORCID = "0000-0001-8769-6650")),
-    person("Feng", "Li", , "feng.li@cufe.edu.cn", role = c("aut", "cre"),
+    person("Feng", "Li", , "feng.li@gsm.pku.edu.cn", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-4248-9778")),
     person("Rob", "Hyndman", , "rob.hyndman@monash.edu", role = "aut",
            comment = c(ORCID = "0000-0002-2140-5352")),
@@ -32,11 +32,12 @@ LazyLoad: yes
 NeedsCompilation: no
 Repository: CRAN
 RoxygenNote: 7.3.1
-Packaged: 2024-04-08 01:24:01 UTC; fli
-Author: Yanfei Kang [aut] (<https://orcid.org/0000-0001-8769-6650>),
-  Feng Li [aut, cre] (<https://orcid.org/0000-0002-4248-9778>),
-  Rob Hyndman [aut] (<https://orcid.org/0000-0002-2140-5352>),
-  Mitchell O'Hara-Wild [ctb] (<https://orcid.org/0000-0001-6729-7695>),
-  Bocong Zhao [ctb] (<https://orcid.org/0000-0001-8434-9047>)
-Maintainer: Feng Li <feng.li@cufe.edu.cn>
-Date/Publication: 2024-04-10 17:10:20 UTC
+Packaged: 2026-02-26 04:03:03 UTC; fli
+Author: Yanfei Kang [aut] (ORCID: <https://orcid.org/0000-0001-8769-6650>),
+  Feng Li [aut, cre] (ORCID: <https://orcid.org/0000-0002-4248-9778>),
+  Rob Hyndman [aut] (ORCID: <https://orcid.org/0000-0002-2140-5352>),
+  Mitchell O'Hara-Wild [ctb] (ORCID:
+    <https://orcid.org/0000-0001-6729-7695>),
+  Bocong Zhao [ctb] (ORCID: <https://orcid.org/0000-0001-8434-9047>)
+Maintainer: Feng Li <feng.li@gsm.pku.edu.cn>
+Date/Publication: 2026-02-26 07:30:02 UTC
